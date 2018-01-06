@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('ads', 'AdsController@showAllAds');
+
+Route::get('ads/{ad}', 'AdsController@showOneAd');
+
+Route::post('ads', 'AdsController@createOneAd');
+
+Route::put('ads/{ad}', 'AdsController@updateOneAd');
+
+Route::delete('ads/{ad}', 'AdsController@deleteOneAd');
