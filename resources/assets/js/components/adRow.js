@@ -1,24 +1,53 @@
 import React from 'react';
+import axios from 'axios';
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Link} from 'react-router-dom';
 
 const style = {
 	margin: 12,
 };
 
 export default class AdRow extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleOnDelete = this.handleOnDelete.bind(this);
+	}
+
+	handleOnDelete() {
+		// Delete doesn't work if AdBlock is active on the page
+		let uri = 'http://localhost:8000/api/ads/';
+		axios.delete(uri + this.props.ad.id).then((response) => {
+			console.log(response);
+			this.props.reRender();
+		})
+	}
+
 	render() {
+		let number = this.props.ad.id;
 		return (
-			<Card>
-				<CardTitle title={this.props.ad.title} />
-				<CardText>
-					{this.props.ad.description}
-				</CardText>
-				<CardActions>
-					<RaisedButton label="Modifier" style={style} />
-					<RaisedButton label="Supprimer" secondary={true} style={style}/>
-				</CardActions>
-			</Card>
+				<Card className='card'
+							style={{
+								marginTop: 10,
+								marginLeft: 5,
+								marginRight: 5
+							}}>
+					<Link to={`/${number}`} className='link'>
+						<CardTitle
+							title={this.props.ad.title}
+							subtitle={this.props.ad.created_at.slice(0,10)}
+						/>
+						<CardText>
+							{this.props.ad.description}
+						</CardText>
+					</Link>
+					<CardActions>
+						<Link to={`/creer/${number}`}>
+							<RaisedButton label="Modifier" style={style} />
+						</Link>
+						<RaisedButton label="Supprimer" secondary={true} style={style} onClick={this.handleOnDelete}/>
+					</CardActions>
+				</Card>
 		);
 	}
 }

@@ -2,6 +2,12 @@ body {
     margin : 0;
 }
 
+.global {
+   margin-bottom : 10px;
+    display : flex;
+    justify-content : center;
+}
+
 a {
     text-decoration : none;
 }
@@ -15,4 +21,64 @@ a {
     color : white;
     font-size : x-large;
     font-style: italic;
+}
+
+.navActions {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+.card:hover {
+    background-color : #EEE !important;
+}
+
+link:hover {
+    cursor : pointer;
+}
+
+.form {
+    text-align : center;
+    padding : 20px 0;
+}
+
+.adHeader, .adBody, .adCategory {
+    display : flex;
+    align-items : center;
+    width : 80%;
+    margin : auto;
+}
+
+.adHeader {
+    height : 20%;
+    justify-content : space-between;
+}
+
+.adBody {
+    height : 50%;
+    text-align: justify;}
+
+.adCategory {
+    height : 30%;
+    justify-content : center;
+}
+
+.cards {
+    width : 90%;
+    margin-left : auto;
+    margin-right : auto
+}
+
+@media screen and (min-width: 992px) {
+    .global {
+        width : 990px;
+        margin-left : auto;
+        margin-right : auto
+    }
+
+    .cards {
+        width : 70%;
+        margin-left : auto;
+        margin-right : auto
+    }
 }

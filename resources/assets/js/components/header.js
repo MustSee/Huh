@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu'
 import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router-dom';
 
 export default class Header extends Component {
@@ -35,7 +36,16 @@ export default class Header extends Component {
 							<Menu/>
 						</IconButton>
 					}
-				/>
+				>
+					<div className="navActions">
+						<Link to='/'>
+							<FlatButton label="Offres" />
+						</Link>
+						<Link to='/creer'>
+							<FlatButton label="Déposer une annonce" />
+						</Link>
+					</div>
+				</AppBar>
 				<Drawer
 					docked={false}
 					width={250}
@@ -47,7 +57,7 @@ export default class Header extends Component {
 					<Link to='/'>
 						<MenuItem onClick={this.handleClose}>Offres</MenuItem>
 					</Link>
-					<Link to='/deposer'>
+					<Link to='/creer'>
 						<MenuItem onClick={this.handleClose}>Déposer une anonce</MenuItem>
 					</Link>
 				</Drawer>
