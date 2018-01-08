@@ -15,10 +15,11 @@ class AdsTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         // Create 30 ad records
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             Ad::create([
                 'title' => $faker->title,
-                'description' => $faker->paragraph
+                'description' => $faker->paragraph,
+                'category_id' => $faker->numberBetween($min = 1, $max = 4)
             ]);
         }
     }

@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Paper from 'material-ui/Paper';
+import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 
 const style = {
 	height: 500,
@@ -22,7 +23,7 @@ export default class OneAd extends React.Component {
 		let id = this.props.match.params.number;
 		let uri = 'http://localhost:8000/api/ads/';
 		axios.get(uri + id).then((response) => {
-			this.setState({ad : response.data});
+			this.setState({ad : response.data[0]});
 		});
 	}
 
@@ -40,7 +41,9 @@ export default class OneAd extends React.Component {
 					</div>
 					<Divider/>
 					<div className='adCategory'>
-						Chip categories
+						<Chip style={{margin : 4}}>
+							{this.state.ad.name}
+						</Chip>
 					</div>
 					<Divider/>
 				</Paper>

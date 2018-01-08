@@ -4,17 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ad;
+use Illuminate\Support\Facades\DB;
 
 class AdsController extends Controller
 {
     public function showAllAds()
     {
-        return response(Ad::all(), 200);
+        $ads = DB::table('ads')
+            ->leftJoin('categories', 'ads.category_id', '=', 'categories.id')
+            ->select('ads.id', 'ads.title', 'ads.description', 'ads.created_at', 'ads.category_id', 'categories.name')
+            ->orderBy('ads.id', 'asc')
+            ->get();
+        return response($ads, 200);
     }
 
     public function showOneAd(Ad $ad)
     {
-        return response($ad, 200);
+        $res = DB::table('ads')
+            ->leftJoin('categories', 'ads.category_id', '=', 'categories.id')
+            ->select('ads.id', 'ads.title', 'ads.description', 'ads.created_at', 'ads.category_id', 'categories.name')
+            ->where('ads.id', $ad->id)
+            ->get();
+        return response($res, 200);
     }
 
     public function createOneAd(Request $request)

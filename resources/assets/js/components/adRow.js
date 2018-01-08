@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router-dom';
+import Chip from 'material-ui/Chip';
 
 const style = {
 	margin: 12,
@@ -33,10 +34,15 @@ export default class AdRow extends React.Component {
 								marginRight: 5
 							}}>
 					<Link to={`/${number}`} className='link'>
-						<CardTitle
-							title={this.props.ad.title}
-							subtitle={this.props.ad.created_at.slice(0,10)}
-						/>
+						<div className="cardHeader">
+							<CardTitle
+								title={this.props.ad.title}
+								subtitle={this.props.ad.created_at ? this.props.ad.created_at.slice(0,10) : null}
+							/>
+							<Chip style={{margin : 4}}>
+								{this.props.ad.name}
+							</Chip>
+						</div>
 						<CardText>
 							{this.props.ad.description}
 						</CardText>
